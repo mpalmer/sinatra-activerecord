@@ -1,3 +1,4 @@
+require 'test/unit'
 require 'sinatra/base'
 require 'sinatra/activerecord'
 
@@ -32,4 +33,13 @@ class TestSinatraActiveRecord < Test::Unit::TestCase
     assert @app.database.respond_to? :table_exists?
   end
 
+  def test_db_urls_with_a_path
+    @app.database = 'sqlite:///test/foo.db'
+    assert_equal 'test/foo.db', @app.database.connection.instance_variable_get(:@config)[:database]
+  end
+  
+  def test_db_urls_with_absolute_path
+    @app.database = 'sqlite:////tmp/foo.db'
+    assert_equal '/tmp/foo.db', @app.database.connection.instance_variable_get(:@config)[:database]
+  end
 end

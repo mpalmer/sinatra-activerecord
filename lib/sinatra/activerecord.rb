@@ -42,7 +42,6 @@ module Sinatra
       case url.scheme
       when "sqlite"
         options[:adapter] = "sqlite3"
-        options[:database] = url.host
       when "postgres"
         options[:adapter] = "postgresql"
       end

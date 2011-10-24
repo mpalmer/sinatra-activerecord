@@ -74,6 +74,19 @@ the following code in about anywhere and it'll work just fine:
       erb :foos
     end
 
+### Database file locations
+
+Giving a path to an SQLite database via a URL is slightly painful... far too
+many slashes are needed.  If you want to give a relative path, then you must
+use three slashes before your path name:
+
+    sqlite:///db/foo.db
+
+An absolute path has *four* slashes (an extra one to indicate "absolute
+path"):
+
+    sqlite:////home/foo/db/bar.db
+
 ### NOTE about the rip-off
 
   This Code and README.md is a heavy adaption of [rtomayko's sinatra-sequel](http://github.com/rtomayko/sinatra-sequel/)
