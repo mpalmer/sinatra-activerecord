@@ -22,8 +22,8 @@ module Sinatra
       @database ||= (
         url = URI(database_url)
         ActiveRecord::Base.logger = activerecord_logger
-        ActiveRecord::Base.configurations[environment] = database_options
-        ActiveRecord::Base.establish_connection(environment)
+        ActiveRecord::Base.configurations[environment.to_s] = database_options
+        ActiveRecord::Base.establish_connection(environment.to_s)
         ActiveRecord::Base
       )
     end
