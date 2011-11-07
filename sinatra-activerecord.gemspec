@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = %w[README.md]
   s.add_dependency 'sinatra',    '>= 0.9.4'
 
-  s.has_rdoc = true
   s.homepage = "http://github.com/rtomayko/sinatra-activerecord"
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Sinatra::ActiveRecord"]
   s.require_paths = %w[lib]
