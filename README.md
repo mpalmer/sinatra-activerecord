@@ -87,6 +87,18 @@ path"):
 
     sqlite:////home/foo/db/bar.db
 
+### Using a YAML config file
+
+If you want to store your database environment configurations in a YAML
+file, Rails-style, simply tell your app all about it:
+
+    set :database_config_yaml, "/path/to/some/file.yaml"
+
+And SAR will load the file and configure ActiveRecord appropriately.  It
+will automatically key off your pre-existing `:environment` variable to
+decide which database to connect to.
+
+
 ### NOTE about the rip-off
 
   This Code and README.md is a heavy adaption of [rtomayko's sinatra-sequel](http://github.com/rtomayko/sinatra-sequel/)

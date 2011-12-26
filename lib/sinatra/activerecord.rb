@@ -3,6 +3,7 @@ require 'time'
 require 'sinatra/base'
 require 'active_record'
 require 'logger'
+require 'yaml'
 
 module Sinatra
   module ActiveRecordHelper
@@ -20,12 +21,20 @@ module Sinatra
 
     def database
       @database ||= (
-        url = URI(database_url)
         ActiveRecord::Base.logger = activerecord_logger
-        ActiveRecord::Base.configurations[environment.to_s] = database_options
+        unless database_url.nil?
+          url = URI(database_url)
+          ActiveRecord::Base.configurations[environment.to_s] = database_options
+        end
+
         ActiveRecord::Base.establish_connection(environment.to_s)
         ActiveRecord::Base
       )
+    end
+    
+    def database_config_yaml=(yaml)
+      ActiveRecord::Base.configurations = YAML.load_file(yaml)
+      set :database_url, nil
     end
 
   protected
@@ -53,7 +62,6 @@ module Sinatra
       app.set :database_url, lambda { ENV['DATABASE_URL'] || "sqlite://#{environment}.db" }
       app.set :database_extras, Hash.new
       app.set :activerecord_logger, Logger.new(STDOUT)
-      app.database # force connection
       app.helpers ActiveRecordHelper
     end
   end
