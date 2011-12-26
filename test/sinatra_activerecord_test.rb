@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'sinatra/base'
-require 'sinatra/activerecord'
+require File.expand_path('../../lib/sinatra/activerecord', __FILE__)
 
 class MockSinatraApp < Sinatra::Base
   register Sinatra::ActiveRecordExtension
